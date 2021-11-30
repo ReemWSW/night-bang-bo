@@ -1,6 +1,6 @@
 from django.db import models
 from .category import Category
-
+from django.shortcuts import reverse
 
 class Products(models.Model):
     name = models.CharField(max_length=60)
@@ -32,3 +32,6 @@ class Products(models.Model):
             return Products.objects.filter(second=status)
         else:
             return Products.objects.filter(second=status)
+
+    def get_absolute_url(self):
+        return reverse("product-detail", kwargs={"id": self.id})

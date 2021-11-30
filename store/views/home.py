@@ -29,6 +29,7 @@ class Index(View):
             cart[product] = 1
 
         request.session['cart'] = cart
+        request.session['product'] = product
         print('cart' , request.session['cart'])
         return redirect('homepage')
 

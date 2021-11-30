@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load cart %}
+{% load custom_filter %}
+<!-- body -->
+<div class="container-fluid mt-3">
+	<div class="row">
+
+
+		<!-- filter -->
+
+		<div class="col-lg-3 mx-auto">
+			<div class="list-group">
+
+				<a href="/" class="list-group-item list-group-item-action btn btn-outline-primary">All Products</a>
+
+				{% for category in categories %}
+				<a href="/?category={{category.id}}"
+					class="list-group-item list-group-item-action btn btn-outline-primary ">{{category.name}}</a>
+				{% endfor %}
+			</div>
+			<hr>	
+			<div class="list-group">
+				<a href="/?status=True"
+					class="list-group-item list-group-item-action btn btn-outline-primary ">Second Hand</a>
+				<a href="/?status=False"
+					class="list-group-item list-group-item-action btn btn-outline-primary ">First Hand</a>
+			</div>
+		</div>
+		
+
+		<!-- all products -->
+		<div id='products' class="col-lg-9 mx-auto">
+
+            {% for product in products %}
+            <main class="mt-5 pt-4">
+                <div class="container dark-grey-text mt-5">
+            
+                  <!--Grid row-->
+                  <div class="row wow fadeIn">
+            
+                    <!--Grid column-->
+                    <div class="col-md-6 mb-4">
+            
+                      <img src="{{product.image.url}}" class="img-fluid" alt="">
+            
+                    </div>
+                    <!--Grid column-->
+            
+                    <!--Grid column-->
+                    <div class="col-md-6 mb-4">
+            
+                      <!--Content-->
+                      <div class="p-4">
+            
+                        <div class="mb-3">
+                          <a href="">
+                            <span class="badge purple mr-1">{{ product.category }}</span>
+                          </a>
+                        </div>
+            
+                        <p class="lead">
+                          <span>{{ product.price }} bath</span>
+                        </p>
+            
+                        <p class="lead font-weight-bold">Description</p>
+            
+                        <p>{{ product.description }}</p>
+            
+                        <!-- <a href="/#{{product.id}}" class="btn btn-primary btn-md my-0 p">
+                          Add to cart
+                          <i class="fas fa-shopping-cart ml-1"></i>
+                        </a>
+                        <a href="/#{{product.id}}" class="btn btn-danger btn-md my-0 p">
+                          Remove from cart
+                        </a> -->
+                        <form action="/#{{product.id}}" class="mt-2" method="post">
+                            {% csrf_token %}
+                            <input hidden type="text" name='product' value='{{product.id}}'>
+                            <input type="submit" value="Add to cart" class="btn btn-primary btn-md my-0 p">
+                        </form>
+                        <form action="/#{{product.id}}" class="mt-2" method="post">
+                            {% csrf_token %}
+                            <input hidden type="text" name='product' value='{{product.id}}'>
+                            <input hidden type="text" name='remove' value='True'>
+                            
+                            <input type="submit" value="Remove from cart" class="btn btn-danger btn-md my-0 p">
+                        </form>
+                      </div>
+                      <!--Content-->
+            
+                    </div>
+                    <!--Grid column-->
+            
+                  </div>
+                  <!--Grid row-->
+            
+                  <hr>
+            
+                  
+            
+                </div>
+              </main>
+                {% endfor %}
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}
