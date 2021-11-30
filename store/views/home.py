@@ -45,10 +45,15 @@ def store(request):
     products = None
     categories = Category.get_all_categories()
     categoryID = request.GET.get('category')
+    status = request.GET.get('status')
     if categoryID:
         products = Products.get_all_products_by_categoryid(categoryID)
     else:
         products = Products.get_all_products();
+    
+    if status:
+        products = Products.get_secondhand(status)
+        
 
     data = {}
     data['products'] = products
