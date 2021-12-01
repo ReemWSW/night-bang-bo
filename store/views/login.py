@@ -27,9 +27,9 @@ class Login(View):
                     Login.return_url = None
                     return redirect ('homepage')
             else:
-                error_message = 'Invalid !!'
+                error_message = "Wrong password. Try again "
         else:
-            error_message = 'Invalid !!'
+            error_message = "Couldn't find your email"
 
         print (email, password)
         return render (request, 'login.html', {'error': error_message})

@@ -42,7 +42,7 @@
 							</a>
 						<div class="card-body">
 							<p class="card-title">{{product.name}}</p>
-							<p class="card-text"><b>{{product.price}} bath</b></p>
+							<p class="card-text"><b>{{product.price|currency}}</b></p>
 							{% if product.second %}
 								<p class="card-text"><b>second hand</b></p>
 							{% endif %}
